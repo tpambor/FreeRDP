@@ -11,7 +11,7 @@ jobs:
       image: debian:bookworm
     steps:
     - name: Setup environment
-      run: apt-get install -y --no-install-recommends cmake
+      run: apt update && apt install -y --no-install-recommends cmake
       
     - uses: actions/checkout@v3
 
