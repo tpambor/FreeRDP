@@ -11,7 +11,7 @@ jobs:
       image: debian:bookworm
     steps:
     - name: Setup environment
-      run: apt update && apt install -y --no-install-recommends ca-certificates cmake git ninja-build g++ pkgconf libsystemd-dev libwayland-dev libxkbcommon-dev zlib1g-dev libssl-dev libasound2-dev libpulse-dev libcups2-dev libpcsclite-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libpkcs11-helper1-dev krb5-multidev heimdal-multidev
+      run: apt update && apt install -y --no-install-recommends ca-certificates cmake git ninja-build g++ pkgconf libsystemd-dev libicu-dev libwayland-dev libxkbcommon-dev zlib1g-dev libssl-dev libasound2-dev libpulse-dev libcups2-dev libpcsclite-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libpkcs11-helper1-dev krb5-multidev heimdal-multidev
       
     - uses: actions/checkout@v3
 
