@@ -21,5 +21,14 @@ jobs:
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config Release
       
-    - name: Output
-      run: ls -R ${{github.workspace}}/build
+    - name: Install
+      run: cmake --install ${{github.workspace}}/build
+
+    - name: Package
+      run: tar cvzf freerdp.tar.gz /usr/local
+      
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Freerdp Bookworm
+        path: freerdp.tar.gz
