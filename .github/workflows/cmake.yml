@@ -11,7 +11,7 @@ jobs:
       image: debian:bookworm
     steps:
     - name: Setup environment
-      run: apt update && apt install -y --no-install-recommends cmake git ninja
+      run: apt update && apt install -y --no-install-recommends cmake git ninja-build
       
     - uses: actions/checkout@v3
 
