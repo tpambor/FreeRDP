@@ -11,7 +11,7 @@ jobs:
       image: debian:bookworm
     steps:
     - name: Setup environment
-      run: apt update && apt install -y --no-install-recommends ca-certificates cmake git ninja-build
+      run: apt update && apt install -y --no-install-recommends ca-certificates cmake git ninja-build g++
       
     - uses: actions/checkout@v3
 
