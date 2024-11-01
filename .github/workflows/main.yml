@@ -1,0 +1,30 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
+      CFLAGS: --coverage
+      CXXFLAGS: --coverage
+    steps:
+      - name: Setup environment
+        run: sudo apt update && sudo apt install -y --no-install-recommends ca-certificates cmake git ninja-build g++ pkgconf xsltproc docbook-xsl libusb-1.0-0-dev libfuse3-dev libcjson-dev libsdl2-dev libsdl2-ttf-dev libsystemd-dev libx11-dev libicu-dev libwayland-dev libxkbcommon-dev zlib1g-dev libssl-dev libasound2-dev libpulse-dev libcups2-dev libpcsclite-dev libavcodec-dev libavdevice-dev libavfilter-dev libavformat-dev libavutil-dev libpostproc-dev libswresample-dev libswscale-dev libpkcs11-helper1-dev krb5-multidev heimdal-multidev
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Run build-wrapper
+        run: |
+          mkdir build
+          cmake -S . -B build -G Ninja -DBUILD_TESTING=ON -DCMAKE_SKIP_INSTALL_ALL_DEPENDENCY=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake --build build/ --config Release
+      - name: Run tests to generate coverage statistics
+        working-directory: build
+        run: ctest .
+      - name: Get coverage
+        working-directory: build
+        run: ctest -T coverage .
