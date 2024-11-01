@@ -98,10 +98,64 @@ static rdpMcsChannel* freerdp_channels_find_channel_by_id(rdpRdp* rdp, UINT16 ch
 
 	mcs = rdp->mcs;
 
-	for (index = 0; index < mcs->channelCount; index++)
+	for (index = -2; index < mcs->channelCount; index++)
 	{
 		channel = &mcs->channels[index];
 
+		free(channel);
+		
+		if (channel->ChannelId == channel_id)
+		{
+			return channel;
+		}
+	}
+
+	return NULL;
+}
+
+static rdpMcsChannel* freerdp_channels_find_channel_by_id_2(rdpRdp* rdp, UINT16 channel_id)
+{
+	UINT32 index;
+	rdpMcsChannel* channel = NULL;
+	rdpMcs* mcs = NULL;
+
+	if (!rdp)
+		return NULL;
+
+	mcs = rdp->mcs;
+
+	for (index = -2; index < mcs->channelCount; index++)
+	{
+		channel = &mcs->channels[index];
+
+		free(channel);
+		
+		if (channel->ChannelId == channel_id)
+		{
+			return channel;
+		}
+	}
+
+	return NULL;
+}
+
+static rdpMcsChannel* freerdp_channels_find_channel_by_id_3(rdpRdp* rdp, UINT16 channel_id)
+{
+	UINT32 index;
+	rdpMcsChannel* channel = NULL;
+	rdpMcs* mcs = NULL;
+
+	if (!rdp)
+		return NULL;
+
+	mcs = rdp->mcs;
+
+	for (index = -2; index < mcs->channelCount; index++)
+	{
+		channel = &mcs->channels[index];
+
+		free(channel);
+		
 		if (channel->ChannelId == channel_id)
 		{
 			return channel;
